@@ -20,11 +20,6 @@ namespace Webpage.Controllers
             return View();
         }
 
-        public IActionResult CreateRole()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create(User user)
         {
@@ -39,7 +34,7 @@ namespace Webpage.Controllers
                 IdentityResult result = await _userManager.CreateAsync(appUser, user.Password);
 
                 //TODO:Adds Role REMOVE THIS
-                await _userManager.AddToRoleAsync(appUser, "Admin");
+                //await _userManager.AddToRoleAsync(appUser, "Admin");
 
                 if(result.Succeeded) 
                 {
@@ -55,27 +50,6 @@ namespace Webpage.Controllers
 
             }
             return View(user);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateRole(UserRole userRole)
-        {
-            if (ModelState.IsValid)
-            {
-                IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole() { Name = userRole.RoleName });
-                if(result.Succeeded)
-                {
-                    ViewBag.Message = "Role Created Successfully";
-                }
-                else
-                {
-                    foreach(IdentityError error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
-            }
-            return View();
         }
     }
 }

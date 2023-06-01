@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,10 +7,14 @@
 
 @using Microsoft.AspNetCore.Authentication
 
+
+
+<a asp-controller="Admin" asp-action="CreateRole">Add a Role</a>
+
 <h2>Claims</h2>
 
- <d1>
-     @foreach(var claim in User.Claims)
+<d1>
+    @foreach (var claim in User.Claims)
     {
         <dt>@claim.Type</dt>
         <dt>@claim.Value</dt>
@@ -27,4 +30,3 @@
         <dt>@prop.Value</dt>
     }
 </d1>
-
